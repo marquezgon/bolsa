@@ -31,7 +31,6 @@ server.connection({
 
 // Start the server
 server.start((err) => {
-
     if (err) {
         throw err;
     }
