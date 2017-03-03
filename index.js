@@ -1,7 +1,9 @@
 'use strict';
 const Hapi = require('hapi');
-var Mongoose = require('mongoose');
-var credentials = require('./credentials');
+const Mongoose = require('mongoose');
+const credentials = require('./credentials');
+const GraphQL = require('hapi-graphql');
+const schema = require('./schema/schema');
 //var User = require('./models/user.js');
 
 const mongoUri = credentials.mongoUri;
@@ -18,8 +20,7 @@ db.once('open', function callback() {
 // Create a server with a host and port
 const server = new Hapi.Server({
     app: {
-        secret,
-        SALT_WORK_FACTOR: 12
+        secret
     }
 
 });
@@ -29,10 +30,25 @@ server.connection({
     port: 7777
 });
 
-// Start the server
-server.start((err) => {
+server.register(
+  [{
+    register: require('hapi-auth-jwt')
+  }, {
+    register: GraphQL,
+    options: {
+      query: {
+        schema,
+        graphiql: true
+      },
+      route: {
+        path: '/graphql',
+        config: {  }
+      }
+    }
+  }], () => server.start((err) => {
     if (err) {
         throw err;
     }
     console.log('Server running at:', server.info.uri);
-});
+  })
+);

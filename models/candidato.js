@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const mongooseUniqueValidator = require('mongoose-unique-validator');
+const ExperienciaLaboralSchema = require('./experiencia_laboral');
+const EducacionSchema = require('./educacion');
+const ConocimientosSchema = require('./conocimientos');
+const IdiomaSchema = require('./idioma');
 
 const Candidato = new Schema({
     email: {type: String, required: true, unique: true, lowercase: true},
@@ -25,6 +29,6 @@ const Candidato = new Schema({
     scope: {type: String, default: 'candidato'}
 });
 
-schema.plugin(mongooseUniqueValidator);
+Candidato.plugin(mongooseUniqueValidator);
 
 module.exports = mongoose.model('candidato', Candidato);
