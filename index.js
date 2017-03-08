@@ -1,7 +1,7 @@
 'use strict';
 const Hapi = require('hapi');
 const Mongoose = require('mongoose');
-const credentials = require('./credentials');
+//const credentials = require('./credentials');
 const GraphQL = require('hapi-graphql');
 const schema = require('./schema/schema');
 //var User = require('./models/user.js');
@@ -11,6 +11,7 @@ const secret = credentials.secret;
 
 Mongoose.connect(mongoUri);
 const db = Mongoose.connection;
+Mongoose.Promise = global.Promise;
 
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function callback() {
@@ -27,7 +28,8 @@ const server = new Hapi.Server({
 
 server.connection({
     host: 'localhost',
-    port: 7777
+    port: 7777,
+    routes: { cors: true }
 });
 
 server.register(
