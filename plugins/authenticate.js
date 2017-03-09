@@ -2,9 +2,8 @@
 
 exports.register = function (server, options, next) {
   const validate = (request, decodedToken, next) => {
-    
-  }
 
+  }
   server.auth.strategy('jwt', 'jwt', {
     key: server.settings.app.secret,
     validateFunc: validate

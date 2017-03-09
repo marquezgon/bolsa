@@ -1,7 +1,7 @@
 'use strict';
 const Hapi = require('hapi');
 const Mongoose = require('mongoose');
-//const credentials = require('./credentials');
+const credentials = require('./credentials');
 const GraphQL = require('hapi-graphql');
 const schema = require('./schema/schema');
 //var User = require('./models/user.js');
@@ -35,6 +35,8 @@ server.connection({
 server.register(
   [{
     register: require('hapi-auth-jwt')
+  }, {
+    register: require('./routes/auth')
   }, {
     register: GraphQL,
     options: {
