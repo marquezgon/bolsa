@@ -27,8 +27,18 @@ exports.register = function(server, options, next) {
       const email = request.payload.email;
       const identity = request.payload.identity;
       const userType = request.payload.userType;
-      const token = createToken(email, userType);
-      return reply({ token: token }).code(200);
+      Candidato.findOne({ identity }).then((user) => {
+        if(!user) {
+          const candidato = new Candidato({ email, identity });
+          candidato.save().then(() => {
+            const token = createToken(email, userType);
+            return reply({ token: token }).code(200);
+          })
+        } else {
+          const token = createToken(email, userType);
+          return reply({ token: token }).code(200);
+        }
+      })
     }
   })
 

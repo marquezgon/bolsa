@@ -8,7 +8,7 @@ const IdiomaSchema = require('./idioma');
 
 const Candidato = new Schema({
     email: {type: String, required: true, unique: true, lowercase: true},
-    identity_id: { type: String, unique: true },
+    identity: { type: String, unique: true },
     name: String,
     lastname: String,
     gender: {type: String, enum: ['m', 'f']},
