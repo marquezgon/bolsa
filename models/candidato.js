@@ -8,10 +8,11 @@ const IdiomaSchema = require('./idioma');
 
 const Candidato = new Schema({
     email: {type: String, required: true, unique: true, lowercase: true},
-    identity: { type: String },
+    identity: { type: String, unique: true },
     name: String,
     lastname: String,
     gender: {type: String, enum: ['m', 'f']},
+    address: String,
     city: String,
     zip: {type: String, maxlength: 5},
     state: String,
@@ -20,6 +21,7 @@ const Candidato = new Schema({
     nationality: String,
     phone: String,
     secondary_phone: String,
+    civil_status: {type: String, enum: ['Soltero', 'Casado', 'Separado', 'Viudo']},
     created: Date,
     updated: Date,
     experience: [ExperienciaLaboralSchema],
