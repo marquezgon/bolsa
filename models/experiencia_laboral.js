@@ -7,7 +7,7 @@ const ExperienciaLaboralSchema = new Schema ({
     puesto: { type: String, required: [true, 'El puesto dentro de la empresa es obligatorio'] },
     inicio: {type: Date, required: [true, 'La fecha de inicio es obligatoria'] },
     termino: {type: Date },
-    logros: { type: String },
+    descripcion: { type: String },
     salario: { type: string }
     sigue_laborando: { type: Boolean, default: false }
 });
