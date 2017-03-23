@@ -8,7 +8,7 @@ const ExperienciaLaboralSchema = new Schema ({
     inicio: {type: Date, required: [true, 'La fecha de inicio es obligatoria'] },
     termino: {type: Date },
     descripcion: { type: String },
-    salario: { type: string }
+    salario: { type: String },
     sigue_laborando: { type: Boolean, default: false }
 });
 
