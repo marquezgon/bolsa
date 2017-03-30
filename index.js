@@ -36,6 +36,8 @@ server.register(
   [{
     register: require('hapi-auth-jwt')
   }, {
+    register: require('./plugins/authenticate')
+  }, {
     register: require('./routes/auth')
   }, {
     register: GraphQL,

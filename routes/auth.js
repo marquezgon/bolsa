@@ -12,6 +12,23 @@ exports.register = function(server, options, next) {
   }
 
   server.route({
+    method: 'GET',
+    path: '/checkSocialSession',
+    config: {
+      auth: {
+        strategy: 'jwt',
+        mode: 'required'
+      }
+    },
+    handler: function(request, reply) {
+      const email = request.auth.credentials.email;
+      const userType = request.auth.credentials.scope;
+      const identity = request.auth.credentials.identity
+      reply({ email: email, userType: userType, identity: identity });
+    }
+  })
+
+  server.route({
     method: 'POST',
     path: '/login',
     config: {
