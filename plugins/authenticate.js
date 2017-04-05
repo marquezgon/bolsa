@@ -4,8 +4,8 @@ const Candidato  = require('../models/candidato');
 
 exports.register = function (server, options, next) {
   const validate = (request, decodedToken, callback) => {
-    const { identity } = decodedToken;
-    Candidato.findOne({ identity }).then((candidato) => {
+    const identity = decodedToken.identity;
+    Candidato.findOne({ identity:identity }).then((candidato) => {
       if(candidato) {
         return callback(null, true, decodedToken);
       }
